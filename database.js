@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 const env = process.env.NODE_ENV || 'development';
 const databaseUrl = process.env.DATABASE_URL || `mongodb://localhost/why-test_${env}`;
 const options= {
-  useMongoClient: true,
+  "useNewUrlParser": true
 };
 
 module.exports = {

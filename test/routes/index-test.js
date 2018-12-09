@@ -1,6 +1,6 @@
 const {assert} = require('chai');
 const request = require('supertest');
-const {jsdom} = require('jsdom');
+const {JSDOM} = require('jsdom');
 
 const app = require('../../app');
 const {mongoose, databaseUrl, options} = require('../../database');
@@ -10,7 +10,8 @@ const {port} = require('../../server.config').test;
 const PORT = process.env.PORT || port;
 
 const parseTextFromHTML = (htmlAsString, selector) => {
-  const selectedElement = jsdom(htmlAsString).querySelector(selector);
+  const jsdom = new JSDOM(htmlAsString);
+  const selectedElement = jsdom.window.document.querySelector(selector);
   if (selectedElement !== null) {
     return selectedElement.textContent;
   } else {

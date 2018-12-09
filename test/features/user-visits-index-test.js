@@ -1,8 +1,9 @@
 const {assert} = require('chai');
-const {jsdom} = require('jsdom');
+const {JSDOM} = require('jsdom');
 
 const parseTextFromHTML = (htmlAsString, selector) => {
-  const selectedElement = jsdom(htmlAsString).querySelector(selector);
+  const jsdom = new JSDOM(htmlAsString);
+  const selectedElement = jsdom.document.window.querySelector(selector);
   if (selectedElement !== null) {
     return selectedElement.textContent;
   } else {
